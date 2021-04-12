@@ -51,3 +51,37 @@ export async function updateTodo({commit}, todo) {
         console.log('The query for updating a todo has finished');
     }
 }
+
+export async function updateTodoStatus({commit}, todo) {
+    try {
+        await Vue.axios({
+            method: 'PUT',
+            url: `/todos/${todo.id}`,
+            data: {
+               id: todo.id,
+               text: todo.text,
+               done: !todo.done
+            }
+        })
+    } catch(e) {
+        commit('todosError', e.message);
+    } finally {
+        console.log('The query for updating the todo status has finished');
+    }
+}
+
+export async function removeTodo({commit, dispatch}, id) {
+    try {
+        //when we make a query delete with that endpoint (url), json-server knows that we wanna delete this obect from the list
+        await Vue.axios({
+            method: 'DELETE',
+            url: `/todos/${id}`,
+        })
+        //dispatch: so the data gets updated and we see the changes without refreshing the page
+        dispatch('fetchTodos');
+    } catch(e) {
+        commit('todosError', e.message);
+    } finally {
+        console.log('The query for deleting a todo has finished');
+    }
+}
