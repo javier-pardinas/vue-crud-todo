@@ -16,9 +16,8 @@ export async function fetchTodos({commit}) {
 }
 
 
-export async function addTodo({commit, dispatch}, todo) {
+export async function addTodo({commit}, todo) {
     try {
-        //data: todos from our json object
         await Vue.axios({
             method: 'POST',
             url: '/todos',
@@ -28,11 +27,27 @@ export async function addTodo({commit, dispatch}, todo) {
                done: false//by default it is pending
             }
         })
-        //dispatch: first argument of an action that gets executed to execute another action
-        dispatch('fetchTodos');//we will show the todos with the new todo that we just added
     } catch(e) {
         commit('todosError', e.message);
     } finally {
         console.log('The query for creating a todo has finished');
+    }
+}
+
+export async function updateTodo({commit}, todo) {
+    try {
+        await Vue.axios({
+            method: 'PUT',
+            url: `/todos/${todo.id}`,
+            data: {
+               id: todo.id,
+               text: todo.text,
+               done: todo.done
+            }
+        })
+    } catch(e) {
+        commit('todosError', e.message);
+    } finally {
+        console.log('The query for updating a todo has finished');
     }
 }
