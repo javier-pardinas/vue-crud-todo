@@ -1,19 +1,12 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <b-container>
+    <b-nav tabs>
+    <b-nav-item exact to="/todos">TODOS LIST</b-nav-item>
+    <b-nav-item exact to="/todos/create">REGISTER TODO</b-nav-item>
+    </b-nav>
+    </b-container>
     <router-view/>
   </div>
 </template>
 
-<style lang="stylus">
-#app
-  font-family Avenir, Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-  margin-top 60px
-</style>

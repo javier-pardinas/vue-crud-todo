@@ -2,7 +2,7 @@
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue' //we components and view cause we are gonna several pages
+
 //every route must be a page (view)
 
 Vue.use(VueRouter)
@@ -13,16 +13,23 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    redirect: '/todos'//when we are at '/' redirect to '/todos'
   },
   //this is the other way
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/todos',
+    name: 'todos',
+    component: () => import('../views/Todos.vue')
+  },
+  {
+    path: '/todos/create',
+    name: 'todos-create',
+    component: () => import('../views/TodoCreate.vue')
+  },
+  {
+    path: '/todos/:id/update',
+    name: 'todos-update',
+    component: () => import('../views/TodoUpdate.vue')
   }
 ]
 
