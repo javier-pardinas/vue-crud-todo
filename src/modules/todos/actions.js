@@ -45,6 +45,8 @@ export async function updateTodo({commit}, todo) {
                done: todo.done
             }
         })
+        //dispatch: so the data gets updated and we see the changes without refreshing the page
+        dispatch('fetchTodos');
     } catch(e) {
         commit('todosError', e.message);
     } finally {
