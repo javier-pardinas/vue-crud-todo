@@ -52,7 +52,7 @@ export async function updateTodo({commit}, todo) {
     }
 }
 
-export async function updateTodoStatus({commit}, todo) {
+export async function updateTodoStatus({commit, dispatch}, todo) {
     try {
         await Vue.axios({
             method: 'PUT',
@@ -63,6 +63,8 @@ export async function updateTodoStatus({commit}, todo) {
                done: !todo.done
             }
         })
+        //dispatch: so the data gets updated and we see the changes without refreshing the page
+        dispatch('fetchTodos');
     } catch(e) {
         commit('todosError', e.message);
     } finally {

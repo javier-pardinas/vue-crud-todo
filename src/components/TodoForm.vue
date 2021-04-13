@@ -1,10 +1,11 @@
 <template>
+<!--processTodo-->
     <b-form @submit.prevent="$emit('processTodo', todo)">
         <b-form-group id="todo" label="Todo" label-for="todo">
         <!--:state= manage validation.state of this field. using vuelidate ($v) 
         we check that the validation does not work properly-->
             <b-form-input autocomplete="off" id="todo" 
-            v-model="todo.text" :state="$v.todo.text.$invalid" 
+            v-model="todo.text" :state="!$v.todo.text.$invalid" 
             placeholder="What is your task?" @input="$v.todo.touch">
             </b-form-input><!--@input=everytime we touch that field this gets executed and this gets updated-->
             <!--we show the error of the field of this form as long as 
